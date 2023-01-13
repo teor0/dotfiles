@@ -68,6 +68,9 @@ alias udapte='sudo pacman -Syyu'
 # alias for fast software update
 alias update='sudo pacman -Syyu'
 
+# alias for lsd
+alias "ls=lsd"
+
 # colorful grep
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
@@ -109,4 +112,5 @@ PATH=$PATH:.
 echo "Enter cmds for custom commands recap"
 xrdb ~/.config/.Xresources
 # syntax-highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2> /dev/null
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2> /dev/null
