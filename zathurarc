@@ -1,4 +1,3 @@
-set sandbox none
 set statusbar-h-padding 0
 set statusbar-v-padding 0
 set page-padding 1
@@ -6,3 +5,5 @@ set selection-clipboard clipboard
 set window-title-basename true
 map [normal] <C-f> toggle_fullscreen
 map [fullscreen] <C-f> toggle_fullscreen
+map [fullscreen] <Button1> navigate next
+map [fullscreen] <Button2> navigate previous

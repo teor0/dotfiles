@@ -71,6 +71,9 @@ alias update='sudo pacman -Syyu'
 # alias for lsd
 alias "ls=lsd"
 
+# alias for removeOrphans
+alias removeOrphans='pacman -Qdtq | sudo pacman -Rns -'
+
 # colorful grep
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
@@ -109,6 +112,8 @@ ex ()
 
 # various
 PATH=$PATH:.
+PATH="$PATH:/usr/local/texlive/2025/bin/x86_64-linux"
+MANPATH="$MANPATH:/usr/local/texlive/2025/texmf-dist/doc/man"
 echo "Enter cmds for custom commands recap"
 xrdb ~/.config/.Xresources
 # syntax-highlighting
