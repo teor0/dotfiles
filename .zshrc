@@ -1,10 +1,15 @@
-# zsh config file
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
-# colors and prompt
-autoload -U colors && colors
-PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
+# plugins
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh 2> /dev/null
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2> /dev/null
+
 setopt autocd # autocd in the written directory
-stty stop undef # disable ctrl-s to freeze terminal
 setopt interactive_comments
 
 # history into cache
@@ -12,7 +17,7 @@ HISTFILE=~/.cache/zsh/history
 HISTSIZE=50000
 SAVEHIST=10000
 
-# autocomplete
+# auto/tab complete
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
@@ -20,11 +25,11 @@ compinit
 _comp_options+=(globdots) #include hidden file
 
 
-# vi mode
+# enter vi mode with escape
 bindkey -v
 export KEYTIMEOUT=1
 
-# vim comands in completition menu
+# vim keys in completition menu
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
@@ -59,28 +64,28 @@ bindkey '^e' edit-command-line
 # fix typo's
 alias cd..='cd ..'
 alias pdw='pwd'
-alias udpate='sudo pacman -Syyu'
-alias upate='sudo pacman -Syyu'
-alias upadte='sudo pacman -Syyu'
-alias updaet='sudo pacman -Syyu'
-alias udapte='sudo pacman -Syyu'
+alias udpate='sudo apt update; sudo apt upgrade'
+alias upate='sudo apt update; sudo apt upgrade'
+alias upadte='sudo apt update; sudo apt upgrade'
+alias updaet='sudo apt update; sudo apt upgrade'
+alias udapte='sudo apt update; sudo apt upgrade'
 
 # alias for fast software update
-alias update='sudo pacman -Syyu'
+alias update='sudo apt update; sudo apt upgrade'
+
+#alias for bat
+alias "bat=batcat"
 
 # alias for lsd
 alias "ls=lsd"
 
-# alias for removeOrphans
-alias removeOrphans='pacman -Qdtq | sudo pacman -Rns -'
+# alias for cleanup
+alias cleanup='sudo apt autoremove'
 
 # colorful grep
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
-
-# get fastest mirrors
-alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
 
 # ex = EXtractor for all kinds of archives
 # usage: ex <file>
@@ -113,9 +118,8 @@ ex ()
 # various
 PATH=$PATH:.
 PATH="$PATH:/usr/local/texlive/2025/bin/x86_64-linux"
-MANPATH="$MANPATH:/usr/local/texlive/2025/texmf-dist/doc/man"
-echo "Enter cmds for custom commands recap"
-xrdb ~/.config/.Xresources
-# syntax-highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2> /dev/null
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2> /dev/null
+PATH="$PATH:/usr/local/texlive/2025/bin/x86_64-linux/pdflatex"
+source ~/powerlevel10k/powerlevel10k.zsh-theme
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
